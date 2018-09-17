@@ -50,10 +50,10 @@ Screens:
 1.	Main page
 2.	Step Counter
 3.	Calendar
- * Daily calories
- * Weekly Trends
- * Monthly Trends
- * Yearly Trends
+  * Daily calories
+  * Weekly Trends
+  * Monthly Trends
+  * Yearly Trends
 4.	Daily Food Tracker
 5.	Add food to meal
 6.	Search foods
