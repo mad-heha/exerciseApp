@@ -8,7 +8,8 @@ for that day. Overall the app will have 5 features:
   3.	Daily Tracking
   4.	Set Goals
   5.	Share with Friends
-###Step Counter: 
+  
+##Step Counter: 
 A very basic step counter will be displayed on the top half of the main page. Once tapped, it will open a screen 
 that will shows the user’s daily steps, as well as their trend of steps for the past week. It will also show the calories burnt
 and the longest time active/inactive.
