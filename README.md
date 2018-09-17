@@ -9,12 +9,13 @@ for that day. Overall the app will have 5 features:
   4.	Set Goals
   5.	Share with Friends
   
-##Step Counter: 
+Step Counter: 
+------------------
 A very basic step counter will be displayed on the top half of the main page. Once tapped, it will open a screen 
 that will shows the user’s daily steps, as well as their trend of steps for the past week. It will also show the calories burnt
 and the longest time active/inactive.
 
-###Food/Calorie Tracker: 
+Food/Calorie Tracker: 
 Again a basic and straight to the point setup for the calorie tracker will be displayed on the bottom half
 of the main page that will, upon being tapped, display the goal calories for the day, the consumed calories, the burnt calories,
 and the remaining calories. This will also mainly display the food input, so it will display the meals input for that day (allowing 
