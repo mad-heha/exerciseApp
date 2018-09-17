@@ -50,8 +50,8 @@ Screens:
 1.	Main page
 2.	Step Counter
 3.	Calendar
-  i.	Daily calories
-  ii.	Weekly Trends
+  *	Daily calories
+  *	Weekly Trends
   iii.	Monthly Trends
   iv.	Yearly Trends
 4.	Daily Food Tracker
