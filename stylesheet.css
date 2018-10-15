@@ -1,0 +1,89 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.header {
+    text-align: left;
+    background: coral;
+    color: white;
+    padding: 30px 15px; 
+}
+
+.sticky {
+    position: sticky;
+    will-change: transform;
+    top: 0;
+}
+
+.navbar {
+    overflow: hidden;
+    background-color:antiquewhite;
+    padding: 0;
+}
+
+.navbar a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+.navbar a.right {
+    float: right;
+}
+
+.navbar a:hover {
+    background-color: orange;
+}
+
+input[type=text] {
+    width: 100px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+    padding: 3px 20px;
+    float: right;
+    margin: 10px 10px;
+}
+
+input[type=text]:focus {
+    width: 20%;
+}
+
+
+.mySlides {
+    display: none
+}
+
+img {
+    margin: auto;
+    position: relative;
+}
+
+/* Slideshow container */
+.slideshow-container {
+  margin: 0;
+  position: relative;
+  z-index: -1;
+
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
