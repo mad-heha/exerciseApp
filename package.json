@@ -1,0 +1,22 @@
+{
+  "name": "exerciseapp",
+  "version": "1.0.0",
+  "description": "Web Programming Fall 2018",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mad-heha/exerciseApp.git"
+  },
+  "author": "Madeha Shahid",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mad-heha/exerciseApp/issues"
+  },
+  "homepage": "https://github.com/mad-heha/exerciseApp#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
