@@ -1,5 +1,3 @@
-const userData  = require('./userData');
-
 class User{
     constructor(id, username, password){
         this.id = id;
