@@ -12,7 +12,7 @@ class User{
         this.userPushups =[];
         this.userSitups =[];
         this.userMiles =[];
-        this.allowed = [];
+        this.allowed = [String(id)];
     } 
 }
 
