@@ -1,17 +1,11 @@
 class User{
-    constructor(id, username, password){
+    constructor(name, id, fbid){
         this.id = id;
-        this.user = username;
-        this.password = password;
-        this.userGoals = [];
-        this.breakfastFood = [];
-        this.lunchFood = [];
-        this.dinnerFood= [];
-        this.userLunges =[];
-        this.userSquats =[];
-        this.userPushups =[];
-        this.userSitups =[];
-        this.userMiles =[];
+        this.name = name;
+        this.fbid = fbid;
+        this.goals = [];
+        this.meals = []; 
+        this.workouts = [];
         this.allowed = [String(id)];
     } 
 }
@@ -21,53 +15,41 @@ class Track{
         this.users = [];
     }
 
-    addGoal(currGoal, currUser){
-        this.accounts[currUser].userGoals.push(currGoal);
+    login(name, fbid, access_token){
+        let user = this.users.find(x=> x.fbid == fbid);
+        if(!user){
+            user = new User(name, this.users.length, fbid);
+            this.users.push(user);
+        }
+        user.access_token = access_token;
+        return user;
     }
 
-    addBreakfast(currUser, foodName, calories, servingS, servingN, sugar, fat, protein, fiber, sodium){
+    addGoal(user, goal){
+        this.users[user].goals.push(goal);
+    }
+
+    addMeal(user, foodName, calories){
         //creates food object
         var newFood = [
-            foodName, calories, servingS, servingN, sugar, fat, protein, fiber, sodium
+            foodName, calories
         ];
-        //pushes object int breakfastFood
-        this.accounts[currUser].breakfastFood.push(newFood);
+        //pushes object into meals
+        this.users[user].meals.push(newFood);
     }
 
-    addLunch(currUser, foodName, calories, servingS, servingN, sugar, fat, protein, fiber, sodium){
-        //creates food object
-        var newFood = [
-            foodName, calories, servingS, servingN, sugar, fat, protein, fiber, sodium
-        ];
-        //pushes object int0 lunchFood
-        this.accounts[currUser].lunchFood.push(newFood);
-    }
-
-    addDinner(currUser, foodName, calories, servingS, servingN, sugar, fat, protein, fiber, sodium){
-        //creates food object 
-        var newFood = [
-            foodName, calories, servingS, servingN, sugar, fat, protein, fiber, sodium
-        ];
-        //pushes object into dinnerFood
-        this.accounts[currUser].dinnerFood.push(newFood);
-    }
-
-    addExercise(currUser, lunges, squats, pushups, situps, milesRan){
+    addWorkout(user, pushups, situps, milesRan){
         //pushes lunges into user lunges array
-        this.users[currUser].userLunges.push(lunges);
-        //pushes squats into user squats array
-        this.users[currUser].userSquats.push(squats);
-        //pushes pushups into user pushups array
-        this.users[currUser].userPushups.push(pushups);
-        //pushes situps into situps array
-        this.users[currUser].userSitups.push(situps);
-        //pushes milesRan into miles array
-        this.users[currUser].userMiles.push(milesRan);
+        var newWorkout = [
+            pushups, situps, milesRan
+        ];
+        //pushes object into workouts
+        this.users[user].workouts.push(newWorkout);
     }
 
-    givePrivacy(currUser, diffUser){
-        //allows another user to access currUser's information
-        this.users[currUser].allowed.push(diffUser);
+    givePrivacy(user, friend){
+        //allows another user to access User's information
+        this.users[user].allowed.push(friend);
     }
 }
 
