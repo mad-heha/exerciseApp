@@ -7,9 +7,21 @@
                         My Workouts
                     </h5>
                     <ul class="list-group list-group-flush">
-                        <li v-for="e in myExercises" :key="e" class="list-group-item">{{e}}</li>
-                        <!-- <a @click.prevent="addWorkout" class="btn btn-sm btn-primary">Add Workout</a> -->
+                        <li class="list-group-item" v-for= "x in state.myWorkouts" :key="x.name">
+                            {{x.pushups}} Push ups                                                                 
+                            <br> 
+                            {{x.situps}} Sit ups
+                            <br> 
+                            {{x.milesRan}} Miles Ran
+                        </li>
                     </ul> 
+                    <div class="smaller">
+                        <h5 class="card-title">Add Workout</h5>
+                        Push Ups: <input class="form-control" type="number" id="pushups"> 
+                        Sit Ups: <input class="form-control" type="number" id="situps"> 
+                        Miles Ran: <input class="form-control" type="number" id="milesRan">
+                        <a @click.prevent="addWorkout" class="btn btn-sm btn-primary">Add Workout</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -30,36 +42,43 @@
             flex-grow: 1;
         }
     }
+    .smaller {
+        margin:10px;
+    }
 </style>
 
 <script>
 // @ is an alias to /src
 import * as api from '@/services/api_access';
 import * as fb from '@/services/facebook';
-//let loopTimer = null;
 
 export default {
     data(){
         return {
             state: {
                 users: [],
+                workouts: []
             },
-            myExercises: [],
-            newWorkout: null
         }
     },
+    created(){
+            setInterval(()=> this.refresh(), 1000);
+        },
     methods: {
         refresh(){
             api.GetState()
             .then(x=> this.state = x)
         },
 
-        userId: ()=> api.userId,
+        userid: ()=> api.userid,
     
-        //addWorkout() {
-          //  api.Add???????????????????(this.newWorkout)
-            //.then(() => this.newWorkout=null)         
-        //}
+        addWorkout() {
+            let userid = api.GetUserid;
+            let pushups = document.getElementById("pushups").value;
+            let situps = document.getElementById("situps").value;
+            let milesRan = document.getElementById("milesRan").value;
+            api.AddWorkout(userid,pushups,situps,milesRan);    
+        }
     }
 }
 </script>
