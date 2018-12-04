@@ -1,36 +1,39 @@
 const api_root = "http://localhost:80/Tracker";
-export let userId = null;
+export let userid = null;
 
 export function GetState(){
     return myFetch(api_root + "/");
 }
 export function Login(name, fbid, access_token){
     return myFetch(api_root + `/users`, {name, fbid, access_token})
-        .then(x=> {userId = x.id});
+        .then(x=> {userid = x.id});
+}
+export function GetUserid(){
+    return userid;
 }
 export function GetMyGoals(){
-    return myFetch(api_root + `/goals/${userId}`);
+    return myFetch(api_root + `/goals/${userid}`);
 }
 export function GetMyMeals(){
-    return myFetch(api_root + `/meals/${userId}`);
+    return myFetch(api_root + `/meals/${userid}`);
 }
 export function GetFriends(){
-    return myFetch(api_root + `/access/${userId}`);
+    return myFetch(api_root + `/access/${userid}`);
 }
 export function GetWorkouts(){
-    return myFetch(api_root + `/workouts/${userId}`)
+    return myFetch(api_root + `/workouts/${userid}`)
 }
-export function AddFriends(userId, friendId){
-    return myFetch(api_root + `/access`, {userId, friendId})
+export function AddFriend(userid, friendId){
+    return myFetch(api_root + `/friends`, {userid, friendId})
 }
-export function AddMeal(userId, day, foodName, calories){
-    return myFetch(api_root + `/meals`, {userId, day, foodName, calories})
+export function AddMeal(userid, foodName, calories){
+    return myFetch(api_root + `/meals`, {userid, foodName, calories})
 }
-export function AddGoal(userID, newGoal){
-    return myFetch(api_root + `/goals`, {userID, newGoal})
+export function AddGoal(userid, newGoal){
+    return myFetch(api_root + `/goals`, {userid, newGoal})
 }
-export function AddWorkout(userI, pushups, situps, milesRan){
-    return myFetch(api_root + `/workouts`, {userId, pushups, situps, milesRan})
+export function AddWorkout(userid, pushups, situps, milesRan){
+    return myFetch(api_root + `/workouts`, {userid, pushups, situps, milesRan})
 }
 
   function myFetch(url = ``, data = null) {
@@ -38,7 +41,7 @@ export function AddWorkout(userI, pushups, situps, milesRan){
         cache: "no-cache",
         credentials: "same-origin",
         headers: {
-            userId: userId
+            userid: userid
         }
     };
     if(data){

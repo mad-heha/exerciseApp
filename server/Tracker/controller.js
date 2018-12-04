@@ -16,9 +16,9 @@ app.post('/users', (req, res) =>{
 
 //Retrieve user info
 app.get('/users/:id', function(req, res){
-    var userID = req.params.id;
-    if(currTrack.users[req.params.id].givePrivacy.includes(String (userID)))
-        res.send(currTrack.users[req.params.id]);
+    var userid = req.params.id;
+    if(currTrack.users[userid].friends.includes(String (userid)))
+        res.send(currTrack.users[userid]);
     else
         res.send("You don't have access to view this account.");  
 })
@@ -31,25 +31,25 @@ app.post('/goals', function(req, res){
 
 //View goals
 app.get('/goals/:id', function(req, res){
-    var userID = req.params.id;
-    if(currTrack.users[req.params.id].givePrivacy.includes(String (userID)))
-        res.send(currTrack.users[req.params.id].name + "'s goals: \n" + currTrack.users[req.params.id].userGoals);
+    var userid = req.params.id;
+    if(currTrack.users[userid].friends.includes(String (userid)))
+        res.send(currTrack.users[userid].name + "'s goals: \n" + currTrack.users[userid].userGoals);
     else
         res.send("You don't have access to view this account.");   
 })
 
 //Add meal
 app.post('/meals', function(req, res){
-    var userID = req.header("userID");
-    currTrack.addMeal(userID, req.body.foodName, req.body.calories);
+    var userid = req.header("userid");
+    currTrack.addMeal(userid, req.body.foodName, req.body.calories);
     res.send("Added food to breakfast");
 })
 
 //View meal
 app.get('/meals/:id', function(req, res){
-    var userID = req.params.id;
-    if(currTrack.users[req.params.id].givePrivacy.includes(String (userID))){
-        res.send(currTrack.users[req.params.id].name + "'s Meals: " +  currTrack.users[req.params.id].meals);
+    var userid = req.params.id;
+    if(currTrack.users[userid].friends.includes(String (userid))){
+        res.send(currTrack.users[userid].name + "'s Meals: " +  currTrack.users[userid].meals);
     }
     else
         res.send("You don't have access to view this account.");
@@ -57,16 +57,16 @@ app.get('/meals/:id', function(req, res){
 
 //Add Exercises
 app.post('/workouts', function(req, res){
-    var userID = req.header("userID");
-    currTrack.addExercise(userID, req.body.pushups, req.body.situps, req.body.milesRan);
+    var userid = req.header("userid");
+    currTrack.addWorkout(userid, req.body.pushups, req.body.situps, req.body.milesRan);
     res.send("Added workout");
 })
 
 //Display exercises
 app.get('/workouts/:id', function(req, res){
-    var userID = req.params.id;
-    if(currTrack.users[req.params.id].givePrivacy.includes(String (userID))){
-        res.send(currTrack.users[req.params.id].name + "'s Workout: " + currTrack.users[req.params.id].workouts)
+    var userid = req.params.id;
+    if(currTrack.users[userid].friends.includes(String (userid))){
+        res.send(currTrack.users[userid].name + "'s Workout: " + currTrack.users[userid].workouts)
     }
     else
         res.send("You don't have access to view this account.");
@@ -74,16 +74,16 @@ app.get('/workouts/:id', function(req, res){
 
 //Allows other user's to access currUser's information
 app.get('/access', function(req, res){
-    var userID = req.header("userID");
-    currTrack.givePrivacy(req.body.diffUser, userID);
+    var userid = req.header("userid");
+    currTrack.friends(req.body.diffUser, userid);
     res.send("Granted access!");
 })
 
 //Display friends
 app.get('/access:id', function(req, res){
-    var userID = req.params.id;
-    if(currTrack.users[req.params.id].givePrivacy.includes(String (userID))){
-        res.send(currTrack.users[req.params.id].name + "'s Friends: " +  currTrack.users[req.params.id].allowed);
+    var userid = req.params.id;
+    if(currTrack.users[userid].friends.includes(String (userid))){
+        res.send(currTrack.users[userid].name + "'s Friends: " +  currTrack.users[userid].allowed);
     }
     else
         res.send("You don't have access to view this account.");

@@ -6,7 +6,7 @@ class User{
         this.goals = [];
         this.meals = []; 
         this.workouts = [];
-        this.allowed = [String(id)];
+        this.friends = [String(id)];
     } 
 }
 
@@ -47,9 +47,9 @@ class Track{
         this.users[user].workouts.push(newWorkout);
     }
 
-    givePrivacy(user, friend){
+    addFriend(user, friend){
         //allows another user to access User's information
-        this.users[user].allowed.push(friend);
+        this.users[user].friends.push(friend);
     }
 }
 

@@ -4,8 +4,12 @@
                 <br>
                 <div class="card">
                     <h5 class="card-header">
-                        My Profile <a @click.prevent="login" class="btn btn-sm btn-primary" :class="{disabled: userId() !== null}">Log in</a>
+                        
+                       
+                        My Profile <a @click.prevent="login" class="btn btn-sm btn-primary" :class="{disabled: userid() !== null}">Log in</a>
                         <br>
+                        <i v-if="userid() !== null">(Welcome {{state.users[userid()].name}})</i>
+                        <br> 
                     </h5>
                     <br>
                     <div class="row">
@@ -15,15 +19,14 @@
                                     My Goals
                                 </h5>
                                 <ul class="list-group list-group-flush">
-                                    <li v-for="g in myGoals" :key="g" class="list-group-item">{{g}}</li>
+                                    <li class="list-group-item" v-for= "g in state.myGoals" :key="g">{{g}}</li>
                                 </ul>
-                                <form id="new-goal" @submit.prevent="addGoal">
-                                    <div> 
-                                        <label for="goal">Add Goal</label>
-                                        <input id="goal" v-model="newGoal">
-                                        <input class="btn btn-sm btn-primary" type="submit" value="Submit">
-                                    </div>
-                                </form>
+                                <br>
+                                <div class="smaller">
+                                    <h5 class="card-title">Add Goal</h5>
+                                        Goal: <input class="form-control" type="text" id="newGoal">
+                                        <a @click.prevent="addGoal" class="btn btn-sm btn-primary">Add Goal</a>
+                                </div>
                             </div>
                         </div>
 
@@ -33,14 +36,17 @@
                                     My Friends
                                 </h5>
                                 <ul class="list-group list-group-flush">
-                                    <li v-for="m in myFriends" :key="m" class="list-group-item">{{m}}</li>
+                                    <li v-for="m in friends" :key="m" class="list-group-item">{{m}}</li>
                                 </ul>  
+                                <br>
+                                <div class="smaller">
+                                    <h5 class="card-title">Add Friend</h5>
+                                        Friend Name: <input class="form-control" type="text" id="friend">
+                                        <a @click.prevent="addFriend" class="btn btn-sm btn-primary">Add Friend</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <pre>
-                        {{$data}}
-                    </pre>
                 </div>
             </div>
         </div>
@@ -60,6 +66,9 @@
             flex-grow: 1;
         }
     }
+    .smaller {
+        margin: 10px;
+    }
 </style>
 
 <script>
@@ -72,15 +81,13 @@ export default {
         return {
             state: {
                 users: [],
-            },
-            myGoals: [],
-            newGoal: null,
-            myFriends: [],
-            
+                goals: [],
+                friends: [],
+            },        
         }
     },
         created(){
-            setInterval(()=> this.refresh(), 5000);
+            setInterval(()=> this.refresh(), 1000);
         },
     methods: {
         refresh(){
@@ -88,14 +95,20 @@ export default {
             .then(x=> this.state = x)
         },
 
-        userId: ()=> api.userId,
+        userid: ()=> api.userid,
 
         login() {
             fb.FBLogin();
         },
         addGoal() {
-            api.AddGoal(this.newGoal)
-            .then(() => this.newGoal=null) 
+            let userid = api.GetUserid;
+            let newGoal = document.getElementById("newGoal").value;
+            api.AddGoal(userid,newGoal);
+        },
+        addFriend() {
+            let userid = api.GetUserid;
+            let friend = document.getElementById("friend").value;
+            api.AddFriend(userid,friend);
         }
     }
 }
