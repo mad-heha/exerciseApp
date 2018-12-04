@@ -4,13 +4,19 @@
                 <br>
                 <div class="card">
                     <h5 class="card-header">
-                        My Meals <a @click.prevent="addMeal" class="btn btn-sm btn-primary">Add Meal</a>
+                        My Meals 
                     </h5>
                     <ul class="list-group list-group-flush">
-                        <li v-for="m in myMeals" :key="m" class="list-group-item">{{m}}
-                            
+                       <li class="list-group-item" v-for= "x in state.myMeals" :key="x.name"><b>Food: {{x.foodName}}</b>
+                                                                                                <br> {{x.calories}} Calories
                         </li>
-                    </ul> 
+                    </ul>
+                    <div class="smaller">
+                        <h5 class="card-title">Add Meal</h5>
+                        Name of Food: <input class="form-control" type="text" id="foodName"> 
+                        Calories: <input class="form-control" type="number" id="calories">
+                        <a @click.prevent="addMeal" class="btn btn-sm btn-primary">Add Meal</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -31,40 +37,41 @@
             flex-grow: 1;
         }
     }
+    .smaller {
+        margin:10px;
+    }
 </style>
 
 <script>
 // @ is an alias to /src
 import * as api from '@/services/api_access';
 import * as fb from '@/services/facebook';
-//let loopTimer = null;
 
 export default {
     data(){
         return {
             state: {
                 users: [],
+                meals: [],
             },
-            myMeals: [],
-            newMeal: null,
-            
         }
     },
       created(){
-   
+            setInterval(()=> this.refresh(), 1000);
         },
-
     methods: {
         refresh(){
             api.GetState()
             .then(x => this.state = x)
         },
 
-        userId: () => api.userId,
+        userid: () => api.userid,
 
         addMeal(){
-            api.AddMeal(this.newMeal)
-            .then(() => this.newMeal = null) 
+            let userid = api.GetUserid;
+            let foodName = document.getElementById("foodName").value;
+            let calories = document.getElementById("calories").value;
+            api.AddMeal(userid,foodName,calories);
         }
         
     }
