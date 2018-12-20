@@ -15,17 +15,16 @@
                             {{x.milesRan}} Miles Ran
                         </li>
                     </ul> 
-                    <div class="smaller">
+                    <div class="smaller ap">
                         <h5 class="card-title">Add Workout</h5>
-                        Push Ups: <input class="form-control" type="number" id="pushups"> 
-                        Sit Ups: <input class="form-control" type="number" id="situps"> 
-                        Miles Ran: <input class="form-control" type="number" id="milesRan">
+                        Push Ups: <input v-select :options="numbers" class="form-control" type="number" id="pushups"></v-select >
+                        Sit Ups: <input v-select :options="numbers" class="form-control" type="number" id="situps"> 
+                        Miles Ran: <input v-select :options="numbers" class="form-control" type="number" id="milesRan">
                         <a @click.prevent="addWorkout" class="btn btn-sm btn-primary">Add Workout</a>
                     </div>
                 </div>
             </div>
         </div>
-
 </template>
 
 <style lang="scss">
@@ -59,6 +58,7 @@ export default {
                 users: [],
                 workouts: []
             },
+            numbers:["5","10","15","20","25","30"]
         }
     },
     created(){
